@@ -1,0 +1,70 @@
+openapi: "3.1.0"
+info:
+  version: 1.0
+description: Manage user access
+servers:
+  - url: http://sevir.com/api
+paths:
+    getUsers:
+      get:
+        description: "Returns users"
+        operationId: getUsers
+        content:
+          '*/*':
+            schema:
+              $ref: "#components/schemas/Users"
+        responses:
+          '200':
+            description: Return a 200 status to indicate that the data was received successfully
+          default:
+            description: Error payload
+            content:
+              'text/xml':
+                schema:
+                  $ref: "#components/schemas/Error"
+
+    newUser:
+      post:
+        requestBody:
+          description: Information about a new user in the system
+          content:
+            '*/*':
+              schema:
+                $ref: '#components/schemas/User'
+        responses:
+            '200':
+              description: Return a 200 status to indicate that the data was received successfully
+    #to-do: Update user, get only a single user
+
+components:
+  schemas:
+    User:
+      required:
+        - id
+        - name
+        - location
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        location:
+          type: string
+        tag:
+          type: string
+    Users:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+    Error:
+      type: object
+      required:
+        - code
+        -  message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

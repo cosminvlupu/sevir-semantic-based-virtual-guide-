@@ -1,0 +1,41 @@
+openapi: "3.1.0"
+info:
+  version: 1.0
+description: Manage location of user
+servers:
+  - url: http://sevir.com/api
+paths:
+  setLocation:
+    post:
+      requestBody:
+        description: Information about the location set
+        content:
+          '*/*':
+            schema:
+              $ref: '#components/schemas/Location'
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received successfully
+
+components:
+  schemas:
+    Location:
+      required:
+        - name
+        - link
+      optional:
+        - latitude
+        - longitude
+      properties:
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+        name:
+          type: string
+        link:
+          type: string
+        tag:
+          type: string
