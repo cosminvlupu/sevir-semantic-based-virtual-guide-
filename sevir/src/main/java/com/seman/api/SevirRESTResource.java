@@ -16,14 +16,14 @@ public class SevirRESTResource {
     @PostMapping
     @RequestMapping(value = "/login", produces = "application/json", consumes = "application/json")
     public @ResponseBody
-    ResponseEntity <String> login(@RequestBody String projects) {
+    ResponseEntity <String> login(@RequestBody LoginForm loginForm) {
         return ResponseEntity.ok(userService.dummyServiceMethod() + " with login.");
     }
 
     @PostMapping
     @RequestMapping(value = "/register", produces = "application/json", consumes = "application/json")
     public @ResponseBody
-    ResponseEntity <String> register(@RequestBody String projects) {
+    ResponseEntity <String> register(@RequestBody RegisterForm registerForm) {
         return ResponseEntity.ok(userService.dummyServiceMethod() + " with register.");
     }
 
